@@ -1,46 +1,47 @@
 package br.com.bandtec.continuada;
 
-public class Professor implements Cursavel{
+public class Produtos implements Vendavel {
+    private int id;
     private String nome;
-    private int horaAulaDia;
-    private double valorHora;
-    private int quantAulas;
+    private String descricao;
+    private int quantProdutos;
+    private double valor;
 
-
-    public Professor(String nome, int horaAulaDia, double valorHora, int quantAulas) {
+    public Produtos(int id, String nome, String descricao, double valor, int quantProdutos) {
+        this.id = id;
         this.nome = nome;
-        this.horaAulaDia = horaAulaDia;
-        this.valorHora = valorHora;
-        this.quantAulas = quantAulas;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.quantProdutos = quantProdutos;
     }
 
-    public double getCalcTotalSalario(){
-        return valorHora*calcTotalHorasSemanais()*4;
-    }
-
-
-    @Override
-    public int calcTotalHorasSemanais() {
-        return quantAulas * horaAulaDia;
+    public int getId() {
+        return id;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public double getValorHora() {
-        return valorHora;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public int getHoraAulaDia() {
-        return horaAulaDia;
+    public int getQuantProdutos() {
+        return quantProdutos;
     }
 
-    public int getQuantAulas() {
-        return quantAulas;
+    public double getValor() {
+        return valor;
     }
 
-    public double getTotalAulaSemanal(){
-        return calcTotalHorasSemanais();
+    @Override
+    public double calcTotalLucro() {
+        return (valor*quantProdutos)*0.5;
+    }
+
+
+    public String getTotalLucro(){
+        return String.format("%.2f",calcTotalLucro());
     }
 }

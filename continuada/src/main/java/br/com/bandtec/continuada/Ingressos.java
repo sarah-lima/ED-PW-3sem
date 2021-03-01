@@ -1,33 +1,21 @@
 package br.com.bandtec.continuada;
 
-public abstract class Aluno implements Cursavel{
-    private String nome;
-    private int quantSemestre;
-    private double valorMes;
-    private int horaAulaDia;
+public abstract class Ingressos implements Vendavel {
+    private int id;
+    private double valor;
 
-    public Aluno(String nome, int quantSemestre, double valorMes, int horaAulaDia) {
-        this.nome = nome;
-        this.quantSemestre = quantSemestre;
-        this.valorMes = valorMes;
-        this.horaAulaDia = horaAulaDia;
+    public Ingressos(int id, double valor) {
+        this.id = id;
+        this.valor = valor;
     }
 
-    public abstract double calcValorTotalCurso();
-
-    public String getNome() {
-        return nome;
+    public int getId() {
+        return id;
     }
 
-    public int getQuantSemestre() {
-        return quantSemestre;
+    public double getValor() {
+        return valor;
     }
 
-    public double getValorMes() {
-        return valorMes;
-    }
-
-    public int getHoraAulaDia() {
-        return horaAulaDia;
-    }
+    public abstract double calcIngresso();
 }

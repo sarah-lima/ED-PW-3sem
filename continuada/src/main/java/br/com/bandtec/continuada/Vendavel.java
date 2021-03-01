@@ -1,5 +1,5 @@
 package br.com.bandtec.continuada;
 
-public interface Cursavel {
-    public int calcTotalHorasSemanais();
+public interface Vendavel {
+    public double calcTotalLucro();
 }

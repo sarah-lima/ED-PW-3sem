@@ -1,38 +1,32 @@
 package br.com.bandtec.continuada;
 
-public class Bolsista extends Aluno{
-    private double descontoBolsa;
-    private int quantAulasExtraCurricularSemanais;
-
-    public Bolsista(String nome, int quantSemestre, double valorSemestre, int horaAulaDia, double descontoBolsa,
-                    int quantAulasExtraCurricularSemanais) {
-        super(nome, quantSemestre, valorSemestre, horaAulaDia);
-        this.descontoBolsa = descontoBolsa;
-        this.quantAulasExtraCurricularSemanais = quantAulasExtraCurricularSemanais;
+public class Adulto extends Ingressos {
+    private int quantTotalAdultos;
+    public Adulto(int id, double valor, int quantTotalAdultos) {
+        super(id, valor);
+        this.quantTotalAdultos = quantTotalAdultos;
     }
 
     @Override
-    public double calcValorTotalCurso() {
-        return descontoBolsa*6*getValorMes()*getQuantSemestre();
+    public double calcIngresso() {
+        return (getValor()*0.1)+getValor();
+    }
+
+    public double getIngresso() {
+        return calcIngresso();
     }
 
     @Override
-    public int calcTotalHorasSemanais() {
-        return (getHoraAulaDia()*5)+(quantAulasExtraCurricularSemanais*5);
+    public double calcTotalLucro() {
+        return calcIngresso()*quantTotalAdultos;
     }
 
-    public double getDescontoBolsa() {
-        return descontoBolsa;
+
+    public String getTotalLucro(){
+        return String.format("%.2f",calcTotalLucro());
     }
 
-    public int getQuantAulasExtraCurricularSemanais() {
-        return quantAulasExtraCurricularSemanais;
-    }
-    public double getTotalAulaSemanal(){
-        return calcTotalHorasSemanais();
-    }
-
-    public double getValorTotalCurso(){
-        return calcValorTotalCurso();
+    public int getQuantTotalAdultos() {
+        return quantTotalAdultos;
     }
 }

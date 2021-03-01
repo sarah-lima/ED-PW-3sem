@@ -1,25 +1,33 @@
 package br.com.bandtec.continuada;
 
-public class NaoBolsista extends Aluno{
-    public NaoBolsista(String nome, int quantSemestre, double valorSemestre, int horaAulaDia) {
-        super(nome, quantSemestre, valorSemestre, horaAulaDia);
+public class Estudante extends Ingressos {
+    private int quantTotalEstudantes;
+
+    public Estudante(int id, double valor, int quantTotalEstudantes) {
+        super(id, valor);
+        this.quantTotalEstudantes = quantTotalEstudantes;
     }
 
     @Override
-    public double calcValorTotalCurso() {
-        return 6*getValorMes()*getQuantSemestre();
+    public double calcIngresso() {
+        return getValor()/2;
+    }
+
+    public double getIngresso() {
+        return calcIngresso();
     }
 
     @Override
-    public int calcTotalHorasSemanais() {
-        return getHoraAulaDia()*5;
+    public double calcTotalLucro() {
+        return quantTotalEstudantes*calcIngresso();
     }
 
-    public int getTotalAulaSemanal(){
-        return calcTotalHorasSemanais();
+
+    public String getTotalLucro(){
+        return String.format("%.2f",calcTotalLucro());
     }
 
-    public double getValorTotalCurso(){
-        return calcValorTotalCurso();
+    public int getQuantTotalEstudantes() {
+        return quantTotalEstudantes;
     }
 }
