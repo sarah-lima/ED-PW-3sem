@@ -17,24 +17,21 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cursaveis")
-public class Escola {
+public class Zoologico {
 
-    private List<Cursavel> cursos = new ArrayList<>();
+    private List<Vendavel> cursos = new ArrayList<>();
 
-    public Escola() {
-        cursos.add(new Bolsista("Sarah",5,100.0,4,0.3,3));
-        cursos.add(new Bolsista("Juliana",10,400.0,5,0.5,10));
-        cursos.add(new NaoBolsista("Marcio",4,500.0,6));
-        cursos.add(new Professor("Juliano", 3,100.0,10));
+    public Zoologico() {
+
     }
 
     @GetMapping
-    public List<Cursavel> getCursaveis(){
+    public List<Vendavel> getCursaveis(){
         return cursos;
     }
 
     @GetMapping("/{posicao}")
-    public Cursavel getCursavel(@PathVariable int posicao){
+    public Vendavel getCursavel(@PathVariable int posicao){
         if(posicao-1<cursos.size()){
             return cursos.get(posicao-1);
         } else{
@@ -53,14 +50,14 @@ public class Escola {
     }
 
     @PostMapping("/bolsista")
-    public String postCursavel(@RequestBody Bolsista c){
+    public String postCursavel(@RequestBody Adulto c){
         cursos.add(c);
         return "Usuário adicionado com sucesso";
     }
 
     @PutMapping("/{posicao}/bolsista")
     public String putCursavel(@PathVariable int posicao,
-                              @RequestBody Bolsista c){
+                              @RequestBody Adulto c){
         if(posicao-1<cursos.size()){
             cursos.set(posicao-1,c);
             return "Atualizado com sucesso";
@@ -69,14 +66,14 @@ public class Escola {
         }
     }
     @PostMapping("/nao-bolsista")
-    public String postCursavel(@RequestBody NaoBolsista c){
+    public String postCursavel(@RequestBody Estudante c){
         cursos.add(c);
         return "Usuário adicionado com sucesso";
     }
 
     @PutMapping("/{posicao}/nao-bolsista")
     public String putCursavel(@PathVariable int posicao,
-                              @RequestBody NaoBolsista c){
+                              @RequestBody Estudante c){
         if(posicao-1<cursos.size()){
             cursos.set(posicao-1,c);
             return "Atualizado com sucesso";
@@ -85,14 +82,14 @@ public class Escola {
         }
     }
     @PostMapping("/professor")
-    public String postCursavel(@RequestBody Professor c){
+    public String postCursavel(@RequestBody Produtos c){
         cursos.add(c);
         return "Usuário adicionado com sucesso";
     }
 
     @PutMapping("/{posicao}/professor")
     public String putCursavel(@PathVariable int posicao,
-                              @RequestBody Professor c){
+                              @RequestBody Produtos c){
         if(posicao-1<cursos.size()){
             cursos.set(posicao-1,c);
             return "Atualizado com sucesso";
