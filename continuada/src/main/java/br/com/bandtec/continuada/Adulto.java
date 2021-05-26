@@ -1,5 +1,7 @@
 package br.com.bandtec.continuada;
 
+
+
 public class Adulto extends Ingressos {
     private int quantTotalAdultos;
     public Adulto(int id, double valor, int quantTotalAdultos) {

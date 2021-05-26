@@ -1,4 +1,4 @@
-package br.com.bandtec.continuada;
+package br.com.bandtec.continuada.Controller;
 /*
 Foi utilizado a interface para forçar duas classes que não tem relação
 (não conseguem se relacionar por herança mas que irão implementar o
@@ -10,6 +10,15 @@ mesmo método de formas diferentes) a terem o mesmo método
  ela recebessem obrigatóriamente seus métodos e atributos
 */
 
+import br.com.bandtec.continuada.*;
+import br.com.bandtec.continuada.Models.Crianca;
+import br.com.bandtec.continuada.Estudante;
+import br.com.bandtec.continuada.Models.IngressoAdulto;
+import br.com.bandtec.continuada.Repositório.IngressoAdultoRepository;
+import br.com.bandtec.continuada.Repositório.IngressoEstudanteRepository;
+import br.com.bandtec.continuada.Repositório.IngressoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,21 +26,29 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/vendas")
-public class Zoologico {
+public class ZoologicoController {
 
     private List<Vendavel> vendas = new ArrayList<>();
+    private Integer count=0;
+    private PilhaObj<Vendavel> pilha = new PilhaObj<>(count);
 
-    public Zoologico() {
-        vendas.add(new Produtos(12,"sorvete","baunilha com chocolate",10.0,3));
-        vendas.add(new Produtos(15,"maça do amor","maça caramelizada com cobertura de chocolate",15.0,2));
-        vendas.add(new Adulto(100,25.0,9));
-        vendas.add(new Crianca(500,25.0,10));
-        vendas.add(new Estudante(250,25.0,2));
+    @Autowired
+    private IngressoAdultoRepository adultoRepository;
+
+    @Autowired
+    private IngressoEstudanteRepository estudanteRepository;
+
+    public ZoologicoController() {
     }
 
-    @GetMapping
-    public List<Vendavel> getVendavel(){
-        return vendas;
+    @GetMapping("/adulto")
+    public ResponseEntity getAdulto(){
+        return ResponseEntity.status(200).body(adultoRepository.findAll());
+    }
+
+    @GetMapping("/estudante")
+    public ResponseEntity getVEstudante(){
+        return ResponseEntity.status(200).body(estudanteRepository.findAll());
     }
 
     @GetMapping("/total-lucro")
@@ -65,6 +82,8 @@ public class Zoologico {
     @PostMapping("/adulto")
     public String postVendavelAdulto(@RequestBody Adulto c){
         vendas.add(c);
+        count++;
+        pilha.push(c);
         return "Usuário adicionado com sucesso";
     }
 
@@ -81,6 +100,8 @@ public class Zoologico {
     @PostMapping("/estudante")
     public String postVendavelEstudante(@RequestBody Estudante c){
         vendas.add(c);
+        count++;
+        pilha.push(c);
         return "Usuário adicionado com sucesso";
     }
 
@@ -98,6 +119,8 @@ public class Zoologico {
     @PostMapping("/crianca")
     public String postVendavelCriancas(@RequestBody Crianca c){
         vendas.add(c);
+        count++;
+        pilha.push(c);
         return "Usuário adicionado com sucesso";
     }
 
@@ -115,6 +138,8 @@ public class Zoologico {
     @PostMapping("/produtos")
     public String postVendavelProdutos(@RequestBody Produtos c){
         vendas.add(c);
+        count++;
+        pilha.push(c);
         return "Usuário adicionado com sucesso";
     }
 
@@ -126,6 +151,15 @@ public class Zoologico {
             return "Atualizado com sucesso";
         } else {
             return "Elemento não encontrado";
+        }
+    }
+    @GetMapping("/desfazer")
+    public ResponseEntity desfazer(){
+        if(pilha.isEmpty()){
+            return ResponseEntity.status(404).body("Nãohá mais operação a ser desfeita");
+        }else{
+            vendas.remove(pilha.peek());
+            return ResponseEntity.ok().build();
         }
     }
 }

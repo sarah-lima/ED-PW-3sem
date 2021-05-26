@@ -1,5 +1,8 @@
 package br.com.bandtec.continuada;
 
+import br.com.bandtec.continuada.Ingressos;
+
+
 public class Estudante extends Ingressos {
     private int quantTotalEstudantes;
 

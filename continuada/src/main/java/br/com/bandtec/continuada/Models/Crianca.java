@@ -1,6 +1,8 @@
-package br.com.bandtec.continuada;
+package br.com.bandtec.continuada.Models;
 
-public class Crianca extends Ingressos{
+import br.com.bandtec.continuada.Ingressos;
+
+public class Crianca extends Ingressos {
     private int quantTotalCrianca;
     public Crianca(int id, double valor, int quantTotalCrianca) {
         super(id, valor);
