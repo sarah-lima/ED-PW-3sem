@@ -1,9 +1,14 @@
 package br.com.bandtec.continuada.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.UUID;
 
 @Entity
 public class IngressoAdulto {
@@ -12,7 +17,7 @@ public class IngressoAdulto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
+    @NotNull
     @Positive
     private int quantidade;
 
@@ -20,6 +25,12 @@ public class IngressoAdulto {
 
     @ManyToOne
     private Ingresso ingresso;
+
+    public void setTempId(String tempId) {
+        this.tempId = tempId;
+    }
+
+    private String tempId;
 
     public boolean isPremium() {
         return isPremium;
@@ -37,7 +48,7 @@ public class IngressoAdulto {
         this.id = id;
     }
 
-    public double getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
@@ -51,5 +62,9 @@ public class IngressoAdulto {
 
     public void setIngresso(Ingresso ingresso) {
         this.ingresso = ingresso;
+    }
+
+    public String getTempId() {
+        return tempId;
     }
 }

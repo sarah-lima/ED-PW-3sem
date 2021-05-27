@@ -1,12 +1,12 @@
 package br.com.bandtec.continuada;
 
-public class Fila {
+public class Fila<T> {
         private int  tamanho;
-        private String[] fila;
+        private T[] fila;
 
     public Fila(int capacidade) {
         tamanho=0;
-        fila= new String[capacidade];
+        fila= (T[]) new String[capacidade];
     }
     public Boolean isEmpty(){
         return tamanho==0;
@@ -14,18 +14,18 @@ public class Fila {
     public Boolean isFull(){
         return tamanho==fila.length;
     }
-    public void insert(String info){
+    public void insert(T info){
         if(isFull()){
             System.out.println("Fila cheia");
         }else{
             fila[tamanho++]= info;
         }
     }
-    public String peek(){
+    public T peek(){
         return fila[0];
     }
-    public String pool(){
-        String primeira= peek();
+    public T pool(){
+        T primeira= peek();
         if(!isEmpty()){
             for(int i=0; i<tamanho-1;i++){
                 fila[i]=fila[i++];

@@ -1,7 +1,7 @@
 package br.com.bandtec.continuada.Models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Entity
@@ -11,7 +11,7 @@ public class IngressoEstudante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
+    @NotNull
     @Positive
     private int quantidade;
 
