@@ -39,9 +39,9 @@ public class LeArquivo {
                 if (tipoRegistro.equals("02")) {
                     Integer quantidadeIngresso = Integer.valueOf(registro.substring(2,6).trim());
                     System.out.println(quantidadeIngresso);
-                    Boolean premium = Boolean.valueOf(registro.substring(6,12).trim());
+                    Boolean premium = Boolean.valueOf(registro.substring(6,11).trim());
                     System.out.println(premium);
-                    Integer tipoIngresso = Integer.parseInt(registro.substring(12,13));
+                    Integer tipoIngresso = Integer.parseInt(registro.substring(11,12));
                     System.out.println(tipoIngresso);
                     Ingresso ingresso= new Ingresso();
                     ingresso.setId(tipoIngresso);
@@ -54,7 +54,7 @@ public class LeArquivo {
                 else if(tipoRegistro.equals("03")) {
                     Integer quantidadeIngresso = Integer.valueOf(registro.substring(2,6).trim());
                     System.out.println(quantidadeIngresso);
-                    Integer tipoIngresso = Integer.parseInt(registro.substring(6,9));
+                    Integer tipoIngresso = Integer.parseInt(registro.substring(6,7));
                     System.out.println(tipoIngresso);
                     Ingresso ingresso= new Ingresso();
                     ingresso.setId(tipoIngresso);
@@ -64,11 +64,14 @@ public class LeArquivo {
                     estudanteRepository.save(ingressoEstudante);
                 }
                 else if(tipoRegistro.equals("04")) {
-                    String tipoProduto = registro.substring(3,13).trim();
+                    String tipoProduto = registro.substring(2,12).trim();
                     System.out.println(tipoProduto);
-                    String descricao= registro.substring(13,28).trim();
-                    Integer quantidade = Integer.valueOf(registro.substring(28,31));
-                    Double valor = Double.valueOf(registro.substring(31,37));
+                    String descricao= registro.substring(12,25).trim();
+                    System.out.println(descricao);
+                    Integer quantidade = Integer.valueOf(registro.substring(25,27));
+                    System.out.println(quantidade);
+                    Double valor = Double.valueOf(registro.substring(27,33));
+                    System.out.println(valor);
                     Produtos produtos = new Produtos();
                     produtos.setQuantProdutos(quantidade);
                     produtos.setDescricao(descricao);

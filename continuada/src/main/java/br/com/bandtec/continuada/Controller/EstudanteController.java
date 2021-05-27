@@ -16,24 +16,22 @@ public class EstudanteController {
 
     @Autowired
     private IngressoEstudanteRepository estudanteRepository;
-    private Integer count = 0;
 
-    private PilhaObj<IngressoEstudante> pilhaEstudante = new PilhaObj<>(count);
+    private PilhaObj<IngressoEstudante> pilhaEstudante = new PilhaObj<>(10);
 
-    @GetMapping("/estudante")
+    @GetMapping
     public ResponseEntity getVEstudante() {
         return ResponseEntity.status(200).body(estudanteRepository.findAll());
     }
 
 
-    @PostMapping("/estudante")
+    @PostMapping
     public ResponseEntity postVendavelEstudante(@RequestBody IngressoEstudante c) {
-        count++;
         pilhaEstudante.push(c);
         return ResponseEntity.status(201).body(estudanteRepository.save(c));
     }
 
-    @PutMapping("/estudante")
+    @PutMapping
     public ResponseEntity putVendavelEstudante(@RequestBody @Valid IngressoEstudante c) {
         if (estudanteRepository.existsById(c.getId())) {
             return ResponseEntity.ok(estudanteRepository.save(c));
