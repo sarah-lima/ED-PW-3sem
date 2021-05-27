@@ -32,7 +32,7 @@ public class AdultoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteProdutos(@PathVariable int id) {
+    public ResponseEntity deleteAdulto(@PathVariable int id) {
         if (adultoRepository.existsById(id)) {
             Optional<IngressoAdulto> ingressoAdulto = adultoRepository.findById(id);
             adultoRepository.deleteById(id);
@@ -43,27 +43,19 @@ public class AdultoController {
     }
 
     @GetMapping("/fila")
-    public ResponseEntity assincrona(@RequestBody IngressoAdulto c){
+    public ResponseEntity getAssincrono(@RequestBody IngressoAdulto c) {
         c.setTempId(UUID.randomUUID().toString());
         fila.insert(c);
         System.out.println(c);
         return ResponseEntity.ok(c.getTempId());
     }
 
-    /*
-    * ID 1-2c5a7d9d-d68f-4d2d-ac81-4c8433d384b7
-    * ID 2-17e161f2-8ade-4152-96d3-1aef2a7f2c4b
-    * ID 3-796f591d-66ca-4f42-aabe-2bb4cf421c7f
-    * ID 4-236174b0-2cce-4497-af76-95b787dc78e4
-    * ID 5-
-    * */
-
     @PostMapping("/fila")
-    public ResponseEntity post(){
-        if(fila.isEmpty()){
+    public ResponseEntity postAssincrono() {
+        if (fila.isEmpty()) {
             return ResponseEntity.ok("Não há nenhuma requisição a tratar");
-        }else{
-            IngressoAdulto ingresso=fila.pool();
+        } else {
+            IngressoAdulto ingresso = fila.pool();
             pilhaAdulto.push(ingresso);
             resultado.add(ingresso);
             ingresso.setId(0);
@@ -73,10 +65,9 @@ public class AdultoController {
     }
 
     @GetMapping("/fila/{uuid}")
-    public ResponseEntity getConsulta(@PathVariable UUID uuid){
-        for(int i=0; i< resultado.size();i++){
-            if(resultado.get(i).getTempId().equals(uuid.toString())){
-                System.out.println("Foi");
+    public ResponseEntity getConsultaAssincrono(@PathVariable UUID uuid) {
+        for (int i = 0; i < resultado.size(); i++) {
+            if (resultado.get(i).getTempId().equals(uuid.toString())) {
                 resultado.remove(i);
                 return ResponseEntity.ok("Resultado processado com sucesso");
             }
@@ -88,15 +79,14 @@ public class AdultoController {
     public ResponseEntity postIngressoAdulto(@RequestBody IngressoAdulto c) {
         c.setTempId(UUID.randomUUID().toString());
         pilhaAdulto.push(c);
-        System.out.println(c);
         return ResponseEntity.status(201).body(adultoRepository.save(c));
     }
 
     @PutMapping
-    public ResponseEntity putVendavelEstudante(@RequestBody IngressoAdulto c) {
+    public ResponseEntity putIngressoAdulto(@RequestBody IngressoAdulto c) {
         if (adultoRepository.existsById(c.getId())) {
             IngressoAdulto naoModificado = adultoRepository.findById(c.getId()).get();
-            IngressoAdulto teste= new IngressoAdulto();
+            IngressoAdulto teste = new IngressoAdulto();
             teste.setIngresso(naoModificado.getIngresso());
             teste.setPremium(naoModificado.isPremium());
             teste.setQuantidade(naoModificado.getQuantidade());
@@ -104,10 +94,7 @@ public class AdultoController {
             teste.setId(naoModificado.getId());
 
             pilhaAdultoUpdate.push(teste);
-            System.out.println(pilhaAdultoUpdate.peek().getQuantidade());
             adultoRepository.save(c);
-            System.out.println(pilhaAdultoUpdate.peek().getQuantidade());
-
             return ResponseEntity.ok(c);
         } else {
             return ResponseEntity.noContent().build();
@@ -125,7 +112,7 @@ public class AdultoController {
     }
 
     @GetMapping("/desfazer")
-    public ResponseEntity desfazer() {
+    public ResponseEntity postDesfazer() {
         if (pilhaAdulto.isEmpty()) {
             return ResponseEntity.status(404).body("Não há mais operação a ser desfeita");
         } else {

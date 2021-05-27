@@ -37,40 +37,38 @@ public class LeArquivo {
                 tipoRegistro = registro.substring(0, 2); // obtém os 2 primeiros caracteres do registro
 
                 if (tipoRegistro.equals("02")) {
-                    Integer quantidadeIngresso = Integer.valueOf(registro.substring(2,6).trim());
+                    Integer quantidadeIngresso = Integer.valueOf(registro.substring(2, 6).trim());
                     System.out.println(quantidadeIngresso);
-                    Boolean premium = Boolean.valueOf(registro.substring(6,11).trim());
+                    Boolean premium = Boolean.valueOf(registro.substring(6, 11).trim());
                     System.out.println(premium);
-                    Integer tipoIngresso = Integer.parseInt(registro.substring(11,12));
+                    Integer tipoIngresso = Integer.parseInt(registro.substring(11, 12));
                     System.out.println(tipoIngresso);
-                    Ingresso ingresso= new Ingresso();
+                    Ingresso ingresso = new Ingresso();
                     ingresso.setId(tipoIngresso);
                     IngressoAdulto ingressoAdulto = new IngressoAdulto();
                     ingressoAdulto.setQuantidade(quantidadeIngresso);
                     ingressoAdulto.setPremium(premium);
                     ingressoAdulto.setIngresso(ingresso);
                     repository.save(ingressoAdulto);
-                }
-                else if(tipoRegistro.equals("03")) {
-                    Integer quantidadeIngresso = Integer.valueOf(registro.substring(2,6).trim());
+                } else if (tipoRegistro.equals("03")) {
+                    Integer quantidadeIngresso = Integer.valueOf(registro.substring(2, 6).trim());
                     System.out.println(quantidadeIngresso);
-                    Integer tipoIngresso = Integer.parseInt(registro.substring(6,7));
+                    Integer tipoIngresso = Integer.parseInt(registro.substring(6, 7));
                     System.out.println(tipoIngresso);
-                    Ingresso ingresso= new Ingresso();
+                    Ingresso ingresso = new Ingresso();
                     ingresso.setId(tipoIngresso);
                     IngressoEstudante ingressoEstudante = new IngressoEstudante();
                     ingressoEstudante.setQuantidade(quantidadeIngresso);
                     ingressoEstudante.setIngresso(ingresso);
                     estudanteRepository.save(ingressoEstudante);
-                }
-                else if(tipoRegistro.equals("04")) {
-                    String tipoProduto = registro.substring(2,12).trim();
+                } else if (tipoRegistro.equals("04")) {
+                    String tipoProduto = registro.substring(2, 12).trim();
                     System.out.println(tipoProduto);
-                    String descricao= registro.substring(12,25).trim();
+                    String descricao = registro.substring(12, 25).trim();
                     System.out.println(descricao);
-                    Integer quantidade = Integer.valueOf(registro.substring(25,27));
+                    Integer quantidade = Integer.valueOf(registro.substring(25, 27));
                     System.out.println(quantidade);
-                    Double valor = Double.valueOf(registro.substring(27,33));
+                    Double valor = Double.valueOf(registro.substring(27, 33));
                     System.out.println(valor);
                     Produtos produtos = new Produtos();
                     produtos.setQuantProdutos(quantidade);
@@ -78,10 +76,8 @@ public class LeArquivo {
                     produtos.setTipo(tipoProduto);
                     produtos.setValor(valor);
                     produtosRepository.save(produtos);
-                }
-                else if(tipoRegistro.equals("00")||tipoRegistro.equals("01")){
-                }
-                else {
+                } else if (tipoRegistro.equals("00") || tipoRegistro.equals("01")) {
+                } else {
                     System.out.println("Tipo de registro inválido");
                 }
                 // lê o próximo registro
@@ -92,7 +88,7 @@ public class LeArquivo {
 
             // Fecha o arquivo
             entrada.close();
-            File file= new File(nomeArq);
+            File file = new File(nomeArq);
             file.delete();
         } catch (IOException e) {
             System.err.printf("Erro ao ler arquivo: %s.\n", e.getMessage());

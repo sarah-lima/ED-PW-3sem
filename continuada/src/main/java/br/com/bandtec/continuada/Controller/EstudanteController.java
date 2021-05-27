@@ -20,19 +20,19 @@ public class EstudanteController {
     private PilhaObj<IngressoEstudante> pilhaEstudante = new PilhaObj<>(10);
 
     @GetMapping
-    public ResponseEntity getVEstudante() {
+    public ResponseEntity getEstudante() {
         return ResponseEntity.status(200).body(estudanteRepository.findAll());
     }
 
 
     @PostMapping
-    public ResponseEntity postVendavelEstudante(@RequestBody IngressoEstudante c) {
+    public ResponseEntity postEstudante(@RequestBody IngressoEstudante c) {
         pilhaEstudante.push(c);
         return ResponseEntity.status(201).body(estudanteRepository.save(c));
     }
 
     @PutMapping
-    public ResponseEntity putVendavelEstudante(@RequestBody @Valid IngressoEstudante c) {
+    public ResponseEntity putEstudante(@RequestBody @Valid IngressoEstudante c) {
         if (estudanteRepository.existsById(c.getId())) {
             return ResponseEntity.ok(estudanteRepository.save(c));
         } else {
@@ -41,7 +41,7 @@ public class EstudanteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteProdutos(@PathVariable int id) {
+    public ResponseEntity deleteEstudante(@PathVariable int id) {
         if (estudanteRepository.existsById(id)) {
             Optional<IngressoEstudante> ingressoEstudante = estudanteRepository.findById(id);
             estudanteRepository.deleteById(id);
@@ -52,7 +52,7 @@ public class EstudanteController {
     }
 
     @DeleteMapping("/desfazer")
-    public ResponseEntity desfazer() {
+    public ResponseEntity postDesfazer() {
         if (pilhaEstudante.isEmpty()) {
             return ResponseEntity.status(404).body("Nãohá mais operação a ser desfeita");
         } else {

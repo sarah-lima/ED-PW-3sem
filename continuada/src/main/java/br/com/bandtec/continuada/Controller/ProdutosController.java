@@ -17,9 +17,8 @@ public class ProdutosController {
     @Autowired
     private ProdutosRepository repository;
 
-    private Integer count = 0;
 
-    private PilhaObj<Produtos> pilha = new PilhaObj<>(count);
+    private PilhaObj<Produtos> pilha = new PilhaObj<>(10);
 
     @GetMapping
     public ResponseEntity getProdutos() {
@@ -27,15 +26,14 @@ public class ProdutosController {
     }
 
     @PostMapping
-    public String postVendavelProdutos(@RequestBody Produtos c) {
+    public String postProdutos(@RequestBody Produtos c) {
         repository.save(c);
-        count++;
         pilha.push(c);
         return "Usuário adicionado com sucesso";
     }
 
     @PutMapping
-    public ResponseEntity putVendavelEstudante(@RequestBody @Valid Produtos c) {
+    public ResponseEntity putProdutos(@RequestBody @Valid Produtos c) {
         if (repository.existsById(c.getId())) {
             return ResponseEntity.ok(repository.save(c));
         } else {

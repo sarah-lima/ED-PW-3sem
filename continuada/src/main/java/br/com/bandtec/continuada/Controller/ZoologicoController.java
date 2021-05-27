@@ -39,7 +39,7 @@ public class ZoologicoController {
         System.out.println(conteudo);
         System.out.println(arquivo.getOriginalFilename());
         LeArquivo.leArquivo(arquivo.getOriginalFilename(), ingressoAdultoRepository,
-                ingressoEstudanteRepository,produtosRepository);
+                ingressoEstudanteRepository, produtosRepository);
         return ResponseEntity.status(201).build();
     }
 }

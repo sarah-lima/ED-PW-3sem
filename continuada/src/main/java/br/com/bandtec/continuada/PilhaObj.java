@@ -1,6 +1,6 @@
 package br.com.bandtec.continuada;
 
-public class PilhaObj <T> {
+public class PilhaObj<T> {
 
     private int topo;
     private T[] pilha;
@@ -21,8 +21,7 @@ public class PilhaObj <T> {
     public void push(T info) {
         if (!isFull()) {
             pilha[++topo] = info;
-        }
-        else {
+        } else {
             System.out.println("Pilha cheia");
         }
     }
@@ -36,18 +35,17 @@ public class PilhaObj <T> {
     }
 
     public T peek() {
-        if(!isEmpty()) {
+        if (!isEmpty()) {
             return pilha[topo];
         }
         return null;
     }
 
     public void exibe() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             System.out.println("Pilha vazia");
-        }
-        else {
-            for(int i = 0; i <= topo; i++) {
+        } else {
+            for (int i = 0; i <= topo; i++) {
                 System.out.println(pilha[i]);
             }
         }
