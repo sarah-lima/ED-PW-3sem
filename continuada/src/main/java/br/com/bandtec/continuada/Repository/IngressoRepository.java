@@ -1,4 +1,4 @@
-package br.com.bandtec.continuada.Repositório;
+package br.com.bandtec.continuada.Repository;
 
 import br.com.bandtec.continuada.Models.Ingresso;
 import org.springframework.data.jpa.repository.JpaRepository;

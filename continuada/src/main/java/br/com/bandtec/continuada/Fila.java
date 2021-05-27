@@ -1,12 +1,14 @@
 package br.com.bandtec.continuada;
 
+import java.sql.Array;
+
 public class Fila<T> {
         private int  tamanho;
         private T[] fila;
 
     public Fila(int capacidade) {
         tamanho=0;
-        fila= (T[]) new String[capacidade];
+        fila= (T[]) new Object[capacidade];
     }
     public Boolean isEmpty(){
         return tamanho==0;
@@ -28,7 +30,7 @@ public class Fila<T> {
         T primeira= peek();
         if(!isEmpty()){
             for(int i=0; i<tamanho-1;i++){
-                fila[i]=fila[i++];
+                fila[i]=fila[i+1];
             }
             fila[tamanho-1]= null;
             tamanho--;

@@ -2,7 +2,7 @@ package br.com.bandtec.continuada.Controller;
 
 import br.com.bandtec.continuada.Models.IngressoEstudante;
 import br.com.bandtec.continuada.PilhaObj;
-import br.com.bandtec.continuada.Repositório.IngressoEstudanteRepository;
+import br.com.bandtec.continuada.Repository.IngressoEstudanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
